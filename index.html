@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Durante o desenvolvimento: impede o navegador de reexibir uma versao
+     antiga do documento (era o que trazia a fonte velha de volta apos um
+     reload comum). Pode remover as tres linhas quando publicar. -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Yslaira Gomes, Criadora de Conteúdo | Moda &amp; Beleza</title>
+<meta name="description" content="Yslaira Gomes cria vídeos e artes para marcas de moda e beleza. Edição avançada, IA aplicada com sensibilidade, copywriting e presença de câmera. Veja as entregas e feche parceria.">
+<meta property="og:title" content="Yslaira Gomes, Criadora de Conteúdo">
+<meta property="og:description" content="Vídeos e artes para marcas de moda e beleza. Da ideia ao corte final.">
+<meta property="og:image" content="assets/yslaira-retrato-1.jpg">
+<meta property="og:type" content="website">
+<link rel="preload" as="image" href="assets/yslaira-retrato-1.webp" type="image/webp" fetchpriority="high">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%233B2D28'/%3E%3Ctext x='32' y='46' font-family='Georgia,Times,serif' font-size='40' fill='%23EEDAD3' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Hanken+Grotesk:ital,wght@0,300..700;1,300..600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --porcelain:#FBF7F3;
+    --shell:#F5EBE3;
+    --blush:#EEDAD3;
+    --rose:#D8A093;
+    --clay:#B3735F;
+    --clay-text:#9A5D4A;
+    --sage:#C6D0C5;
+    --ink:#332723;
+    --body:#57453F;
+    --soft:#6B5750;
+    --line:rgba(59,45,40,.13);
+    --line-strong:rgba(59,45,40,.26);
+    --gold:#C7A87F;
+    --surface:#FFFDFB;
+
+    --shadow-soft:
+      0 1px 2px rgba(122,86,74,.05),
+      0 8px 20px -10px rgba(122,86,74,.16),
+      0 26px 60px -30px rgba(122,86,74,.22);
+    --shadow-float:
+      0 2px 4px rgba(122,86,74,.06),
+      0 18px 34px -14px rgba(122,86,74,.22),
+      0 54px 96px -46px rgba(122,86,74,.34);
+
+    --ease:cubic-bezier(.16,1,.3,1);
+    --spring:cubic-bezier(.34,1.42,.5,1);
+
+    --pad-x:clamp(1.25rem,5vw,6rem);
+    --gap-l:clamp(4.5rem,10vw,9rem);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+  body{
+    margin:0;
+    background:var(--porcelain);
+    color:var(--body);
+    font-family:'Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,sans-serif;
+    font-weight:400;
+    font-size:clamp(1.0625rem,1rem + .3vw,1.1875rem);
+    line-height:1.72;
+    overflow-x:hidden;
+  }
+  p{line-height:1.72}
+
+  /* ---------- atmosfera ---------- */
+  .atmosphere{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(60rem 40rem at 82% -8%, rgba(238,218,211,.85), transparent 62%),
+      radial-gradient(48rem 36rem at 4% 22%, rgba(245,235,227,.9), transparent 60%),
+      radial-gradient(40rem 34rem at 96% 68%, rgba(198,208,197,.32), transparent 64%),
+      radial-gradient(52rem 40rem at 20% 104%, rgba(216,160,147,.20), transparent 60%);
+  }
+  .grain{
+    position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:.28;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  }
+  main,header,footer{position:relative;z-index:2}
+
+  /* ---------- tipografia ---------- */
+  .display{font-family:'Fraunces',ui-serif,Georgia,serif;font-weight:600;letter-spacing:-.025em;line-height:.99;color:var(--ink)}
+  .display em{font-style:italic;color:var(--clay)}
+  h1.display{font-size:clamp(2.6rem,5.6vw,4.7rem)}
+  h2.display{font-size:clamp(2.2rem,5.4vw,4.2rem);line-height:1.03}
+  .balance{text-wrap:balance}
+  h3.display{font-size:clamp(1.4rem,2.2vw,1.85rem);line-height:1.16;letter-spacing:-.015em;font-weight:600}
+
+  .kicker{font-size:.76rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:var(--clay-text)}
+  .lede{font-size:clamp(1.115rem,1.4vw,1.27rem);line-height:1.68;color:var(--body);font-weight:400}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:84rem;margin-inline:auto;padding-inline:var(--pad-x)}
+  .section{padding-block:var(--gap-l)}
+
+  .section-head{display:grid;gap:1.5rem;grid-template-columns:1fr;align-items:end;margin-bottom:clamp(2.5rem,5vw,4rem)}
+  @media(min-width:900px){.section-head{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:3rem}}
+  .eyebrow-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.35rem}
+  .eyebrow-row .dash{flex:0 0 3rem;height:1px;background:var(--line-strong)}
+  .section-head .lede{max-width:30rem}
+
+  /* ---------- botões ---------- */
+  .btn{
+    --btn-bg:var(--ink);--btn-fg:#FBF7F3;
+    display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+    padding:1.05rem 2.1rem;border-radius:999px;border:1px solid transparent;
+    background:var(--btn-bg);color:var(--btn-fg);
+    font-size:.8125rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+    text-decoration:none;cursor:pointer;
+    transition:transform .5s var(--spring), box-shadow .5s var(--ease), background-color .35s var(--ease), color .35s var(--ease);
+    box-shadow:0 1px 2px rgba(59,45,40,.10), 0 12px 26px -14px rgba(59,45,40,.5);
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(59,45,40,.12), 0 22px 40px -18px rgba(59,45,40,.55)}
+  .btn:active{transform:translateY(-1px) scale(.985)}
+  .btn:focus-visible{outline:2px solid var(--clay);outline-offset:4px}
+  .btn .arrow{transition:transform .5s var(--spring)}
+  .btn:hover .arrow{transform:translateX(5px)}
+  .btn-ghost{--btn-bg:transparent;--btn-fg:var(--ink);border-color:var(--line-strong);box-shadow:none}
+  .btn-ghost:hover{background:var(--surface);box-shadow:var(--shadow-soft)}
+
+  .link-underline{
+    position:relative;text-decoration:none;color:inherit;
+    background-image:linear-gradient(var(--clay),var(--clay));
+    background-size:0% 1px;background-position:0 100%;background-repeat:no-repeat;
+    transition:background-size .45s var(--ease), color .35s var(--ease);
+  }
+  .link-underline:hover{background-size:100% 1px;color:var(--clay)}
+  .link-underline:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:2px}
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(251,247,243,.72);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid transparent;
+    transition:border-color .4s var(--ease), background-color .4s var(--ease);
+  }
+  .site-header.is-stuck{border-bottom-color:var(--line);background:rgba(251,247,243,.92)}
+  .site-header .bar{display:flex;align-items:center;justify-content:space-between;gap:2rem;padding-block:1.1rem}
+  .brand{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600;letter-spacing:.03em;text-decoration:none;color:var(--ink);white-space:nowrap}
+  .brand em{font-style:italic;color:var(--clay)}
+  .brand:focus-visible{outline:2px solid var(--clay);outline-offset:4px;border-radius:2px}
+  .nav{display:none;gap:2.2rem}
+  @media(min-width:1080px){.nav{display:flex}}
+  .nav a{font-size:.78rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--soft);text-decoration:none;padding-block:.4rem;transition:color .35s var(--ease)}
+  .nav a:hover,.nav a:focus-visible{color:var(--ink)}
+  .nav a:focus-visible{outline:2px solid var(--clay);outline-offset:4px;border-radius:2px}
+  .header-cta{padding:.78rem 1.45rem;font-size:.6875rem}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding-block:clamp(2.75rem,6vw,5.5rem) clamp(3.5rem,7vw,6rem)}
+  .hero-grid{display:grid;gap:clamp(3.5rem,6vw,5rem);grid-template-columns:1fr;align-items:center}
+  @media(min-width:1000px){.hero-grid{grid-template-columns:minmax(0,1.22fr) minmax(0,.78fr)}}
+  .hero h1{margin:.6rem 0 0}
+  .hero-sub{max-width:32rem;margin-top:2.1rem}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.5rem}
+  @media(max-width:520px){
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .hero-actions .btn{width:100%}
+    .kicker{letter-spacing:.16em}
+  }
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:.75rem 2rem;margin-top:3rem;padding-top:1.75rem;
+    border-top:1px solid var(--line);
+    font-size:.76rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--soft);
+  }
+
+  .portrait-stage{position:relative;display:flex;justify-content:center;align-items:center}
+  .portrait-ring{
+    position:absolute;border:1px solid var(--line-strong);border-radius:999px;
+    width:min(112%,33rem);aspect-ratio:1;top:50%;left:50%;transform:translate(-50%,-48%);
+    opacity:.7;pointer-events:none;
+  }
+  .portrait-ring.two{width:min(128%,39rem);opacity:.4;border-style:dashed}
+  @media(max-width:999px){.portrait-ring{display:none}}
+  .portrait{
+    position:relative;width:min(100%,24.5rem);aspect-ratio:3/4;
+    border-radius:999px 999px 1.5rem 1.5rem;overflow:hidden;
+    box-shadow:var(--shadow-float);isolation:isolate;
+  }
+  .portrait picture,.about-photo picture,.vframe picture{display:block;width:100%;height:100%}
+  .portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block}
+  .portrait::before{
+    content:'';position:absolute;inset:0;z-index:2;mix-blend-mode:multiply;pointer-events:none;
+    background:linear-gradient(150deg, rgba(238,218,211,.5), rgba(198,208,197,.14) 55%, rgba(216,160,147,.4));
+  }
+  .portrait::after{
+    content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:linear-gradient(to top, rgba(59,45,40,.4), rgba(59,45,40,.04) 42%, transparent 70%);
+  }
+  .portrait-caption{
+    position:absolute;left:clamp(-.5rem,-1.5vw,-2.25rem);bottom:2rem;z-index:5;
+    background:var(--surface);border:1px solid var(--line);border-radius:1rem;
+    padding:1rem 1.35rem;box-shadow:var(--shadow-soft);max-width:15.5rem;
+  }
+  .portrait-caption p{margin:.15rem 0 0;font-size:.8125rem;line-height:1.5;color:var(--soft)}
+  .portrait-caption strong{display:block;font-family:'Fraunces',serif;font-weight:600;font-size:1.1rem;color:var(--ink);letter-spacing:-.01em}
+
+  /* ---------- ticker ---------- */
+  .ticker{
+    border-block:1px solid var(--line);
+    background:linear-gradient(90deg, rgba(245,235,227,.55), rgba(238,218,211,.45), rgba(245,235,227,.55));
+    overflow:hidden;padding-block:1.05rem;
+  }
+  .ticker-track{display:flex;width:max-content;animation:slide 44s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-group{display:flex;align-items:center;gap:2.5rem;padding-right:2.5rem}
+  .ticker-item{font-family:'Fraunces',serif;font-size:clamp(1rem,1.4vw,1.22rem);font-weight:500;font-style:italic;color:var(--soft);white-space:nowrap}
+  .ticker-dot{width:5px;height:5px;border-radius:999px;background:var(--rose);flex:none}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- sobre ---------- */
+  .about-grid{display:grid;gap:clamp(2.75rem,6vw,5rem);grid-template-columns:1fr;align-items:center}
+  @media(min-width:960px){.about-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1fr)}}
+  .about-media{position:relative}
+  .about-frame{
+    position:absolute;inset:2.75rem -2.75rem -2.75rem 2.75rem;
+    border:1px solid var(--line-strong);border-radius:1.75rem;pointer-events:none;
+    background:linear-gradient(160deg, rgba(238,218,211,.5), rgba(199,168,127,.18));
+  }
+  @media(max-width:959px){.about-frame{inset:1.25rem -1.25rem -1.25rem 1.25rem}}
+  .about-photo{position:relative;border-radius:1.75rem;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow-float);isolation:isolate}
+  .about-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 26%;display:block}
+  .about-photo::before{
+    content:'';position:absolute;inset:0;z-index:2;mix-blend-mode:multiply;
+    background:linear-gradient(200deg, rgba(216,160,147,.2), rgba(245,235,227,.05) 60%, rgba(199,168,127,.16));
+  }
+  .about-photo::after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(to top, rgba(59,45,40,.26), transparent 52%)}
+  .about-body .about-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:clamp(1.3rem,2.15vw,1.7rem);line-height:1.5;letter-spacing:-.015em;color:var(--ink);margin:0 0 1.8rem}
+  .about-body p{margin:0 0 1.2rem;max-width:33rem;color:var(--body)}
+  .pill-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.1rem}
+  .pill{
+    border:1px solid var(--line-strong);border-radius:999px;padding:.5rem 1.1rem;
+    font-size:.74rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);
+    background:rgba(255,253,251,.6);
+    transition:transform .45s var(--spring), background-color .35s var(--ease), color .35s var(--ease);
+  }
+  .pill:hover{transform:translateY(-2px);background:var(--surface);color:var(--ink)}
+
+  /* ---------- entregas ---------- */
+  .skill-list{border-top:1px solid var(--line)}
+  .skill{
+    display:grid;gap:.75rem 2.5rem;grid-template-columns:1fr;
+    padding-block:clamp(2rem,3.6vw,2.75rem);
+    border-bottom:1px solid var(--line);position:relative;
+  }
+  @media(min-width:880px){.skill{grid-template-columns:5rem minmax(0,1fr) minmax(0,1.1fr);align-items:start}}
+  .skill::before{
+    content:'';position:absolute;inset:0 -1.25rem;border-radius:1rem;z-index:-1;
+    background:linear-gradient(90deg, rgba(238,218,211,.6), rgba(245,235,227,0));
+    opacity:0;transition:opacity .5s var(--ease);
+  }
+  .skill:hover::before{opacity:1}
+  .skill:hover .skill-title{transform:translateX(6px)}
+  /* Bodoni fica nos titulos grandes (h1/h2/citacao). Aqui, em tamanho medio e
+     em funcao informativa, a grotesca le muito melhor. */
+  .skill h3.skill-title{
+    font-family:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    font-size:clamp(1.2rem,1.6vw,1.42rem);
+    font-weight:600;letter-spacing:-.005em;line-height:1.3;color:var(--ink);
+    transition:transform .55s var(--spring);
+  }
+  .skill-num{font-family:'Fraunces',serif;font-size:.82rem;font-weight:600;letter-spacing:.16em;color:var(--clay-text);padding-top:.4rem}
+  .skill p{margin:0;color:var(--body);max-width:31rem}
+
+  /* ---------- galerias ---------- */
+  .card-grid{display:grid;gap:clamp(1.25rem,2.4vw,2rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,16.5rem),1fr))}
+  .vframe{
+    position:relative;border-radius:1.35rem;overflow:hidden;aspect-ratio:9/16;margin:0;
+    background:linear-gradient(165deg,var(--shell),var(--blush));
+    border:1px solid var(--line);box-shadow:var(--shadow-soft);
+    transition:transform .6s var(--ease), box-shadow .6s var(--ease);
+    isolation:isolate;
+  }
+  .vframe:hover{transform:translateY(-8px);box-shadow:var(--shadow-float)}
+  .vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  .vframe img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease)}
+  .vframe:hover img{transform:scale(1.045)}
+  .vframe .treat{
+    position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:multiply;
+    background:linear-gradient(180deg, rgba(238,218,211,.28), rgba(216,160,147,.22));
+    opacity:.9;transition:opacity .6s var(--ease);
+  }
+  .vframe:hover .treat{opacity:.4}
+  .vframe .veil{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(to top, rgba(59,45,40,.66), rgba(59,45,40,.06) 46%, transparent 68%)}
+  .vframe figcaption{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:1.25rem 1.35rem;color:#FBF7F3}
+  .vframe figcaption .tag{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;opacity:.85;display:block;margin-bottom:.32rem}
+  .vframe figcaption .name{font-family:'Fraunces',serif;font-size:1.12rem;font-weight:600;letter-spacing:-.005em;display:block;line-height:1.28}
+
+  .slot{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;
+    text-align:center;padding:2rem;color:var(--soft);
+    border:1px dashed var(--line-strong);
+    background:linear-gradient(165deg,rgba(255,253,251,.8),rgba(238,218,211,.55));
+    box-shadow:none;
+  }
+  .slot:hover{transform:none;box-shadow:none}
+  .slot .glyph{width:3.25rem;height:3.25rem;border-radius:999px;border:1px solid var(--line-strong);display:grid;place-items:center;background:var(--surface);color:var(--clay)}
+  .slot .sub{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:1.1rem;color:var(--ink);line-height:1.35}
+  .slot .txt{font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase}
+
+  /* ---------- contato ---------- */
+  .contact{
+    position:relative;border-radius:2rem;overflow:hidden;
+    background:linear-gradient(150deg,#FFFDFB,#F5EBE3 46%,#EEDAD3);
+    border:1px solid var(--line);box-shadow:var(--shadow-float);
+    padding:clamp(2.25rem,5.5vw,4.5rem);
+  }
+  .contact::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(28rem 22rem at 92% 8%, rgba(216,160,147,.32), transparent 66%),
+      radial-gradient(24rem 20rem at 4% 96%, rgba(198,208,197,.34), transparent 64%);
+  }
+  .contact > *{position:relative}
+  .contact-grid{display:grid;gap:clamp(2.25rem,5vw,4rem);grid-template-columns:1fr}
+  @media(min-width:920px){.contact-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center}}
+  .channel{
+    display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.3rem;
+    border:1px solid var(--line);border-radius:1rem;background:rgba(255,253,251,.8);
+    text-decoration:none;color:var(--ink);
+    transition:transform .5s var(--spring), box-shadow .5s var(--ease), background-color .35s var(--ease);
+  }
+  .channel + .channel{margin-top:.7rem}
+  .channel:hover{transform:translateX(6px);background:var(--surface);box-shadow:var(--shadow-soft)}
+  .channel:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
+  .channel .ic{flex:none;width:2.5rem;height:2.5rem;border-radius:999px;display:grid;place-items:center;background:var(--shell);color:var(--clay);border:1px solid var(--line)}
+  .channel .lbl{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);display:block}
+  .channel > span:not(.ic):not(.arrow){min-width:0;flex:1 1 auto}
+  .channel .val{font-size:clamp(.85rem,.72rem + .55vw,.95rem);display:block;line-height:1.4;overflow-wrap:anywhere}
+  .channel .arrow{margin-left:auto;color:var(--clay);transition:transform .5s var(--spring)}
+  .channel:hover .arrow{transform:translateX(4px)}
+
+  /* ---------- footer ---------- */
+  .site-footer{border-top:1px solid var(--line);padding-block:2.75rem;margin-top:var(--gap-l)}
+  .footer-bar{display:flex;flex-wrap:wrap;gap:1.1rem 2rem;align-items:center;justify-content:space-between;font-size:.75rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--soft)}
+  .footer-links{display:flex;flex-wrap:wrap;gap:1.5rem}
+
+  /* ---------- whatsapp flutuante ---------- */
+  .float-wa{
+    position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:70;
+    width:3.4rem;height:3.4rem;border-radius:999px;display:grid;place-items:center;
+    background:var(--ink);color:var(--porcelain);text-decoration:none;
+    box-shadow:0 2px 6px rgba(59,45,40,.18), 0 18px 34px -14px rgba(59,45,40,.6);
+    opacity:0;transform:translateY(1rem) scale(.85);pointer-events:none;
+    transition:opacity .5s var(--ease), transform .6s var(--spring), background-color .35s var(--ease);
+  }
+  .float-wa.is-visible{opacity:1;transform:none;pointer-events:auto}
+  .float-wa:hover{background:var(--clay)}
+  .float-wa:focus-visible{outline:2px solid var(--clay);outline-offset:4px}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(26px)}
+  .reveal.is-in{opacity:1;transform:none;transition:opacity .9s var(--ease), transform 1s var(--ease)}
+  .stagger > *{opacity:0;transform:translateY(22px)}
+  .stagger.is-in > *{opacity:1;transform:none;transition:opacity .85s var(--ease), transform .95s var(--ease)}
+  .stagger.is-in > *:nth-child(1){transition-delay:.04s}
+  .stagger.is-in > *:nth-child(2){transition-delay:.12s}
+  .stagger.is-in > *:nth-child(3){transition-delay:.2s}
+  .stagger.is-in > *:nth-child(4){transition-delay:.28s}
+  .stagger.is-in > *:nth-child(5){transition-delay:.36s}
+  .stagger.is-in > *:nth-child(6){transition-delay:.44s}
+
+  .load-in{opacity:0;transform:translateY(24px);animation:riseIn 1.1s var(--ease) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.27s}.d4{animation-delay:.38s}.d5{animation-delay:.49s}.d6{animation-delay:.6s}
+  @keyframes riseIn{to{opacity:1;transform:none}}
+
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+    .reveal,.stagger > *,.load-in{opacity:1;transform:none}
+  }
+
+  ::selection{background:var(--blush);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="atmosphere" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header" id="topo">
+  <div class="wrap bar">
+    <a class="brand" href="#topo">Yslaira <em>Gomes</em></a>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#entregas">Entregas</a>
+      <a href="#stories">Stories</a>
+      <a href="#moda">Moda</a>
+      <a href="#beleza">Beleza</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn header-cta" href="https://wa.me/+5574981289487?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento!" target="_blank" rel="noopener">
+      Orçamento
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker load-in d1">Criadora de conteúdo &nbsp;·&nbsp; Moda &amp; Beleza</p>
+        <h1 class="display load-in d2">Conteúdo que faz<br>a sua marca<br>ser <em>desejada</em>.</h1>
+        <p class="lede hero-sub load-in d3">
+          Sou Yslaira Gomes. Transformo produtos em vídeos e artes que as pessoas assistem até o fim,
+          da primeira ideia ao corte final, com edição avançada, IA aplicada com sensibilidade e
+          roteiros escritos para gerar ação.
+        </p>
+        <div class="hero-actions load-in d4">
+          <a class="btn" href="https://wa.me/+5574981289487?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento!" target="_blank" rel="noopener">
+            Solicitar orçamento
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="btn btn-ghost" href="#stories">Ver entregas</a>
+        </div>
+        <div class="hero-meta load-in d5">
+          <span>Reels &amp; TikTok</span>
+          <span>Stories</span>
+          <span>Publi &amp; UGC</span>
+          <span>Roteiro e edição</span>
+        </div>
+      </div>
+
+      <div class="portrait-stage load-in d3">
+        <div class="portrait-ring two" aria-hidden="true"></div>
+        <div class="portrait-ring" aria-hidden="true"></div>
+        <div class="portrait">
+          <picture>
+            <source srcset="assets/yslaira-retrato-1.webp" type="image/webp">
+            <img src="assets/yslaira-retrato-1.jpg" alt="Retrato de Yslaira Gomes, criadora de conteúdo de moda e beleza" width="900" height="1600" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="portrait-caption">
+          <strong>Yslaira Gomes</strong>
+          <p>Criadora de conteúdo para marcas de moda e beleza.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-group">
+        <span class="ticker-item">Edição avançada</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Edição com IA</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Copywriting</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Oratória</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Moda</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Beleza</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Stories que vendem</span><span class="ticker-dot"></span>
+      </div>
+      <div class="ticker-group">
+        <span class="ticker-item">Edição avançada</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Edição com IA</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Copywriting</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Oratória</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Moda</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Beleza</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Stories que vendem</span><span class="ticker-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SOBRE ============ -->
+  <section class="section wrap" id="sobre">
+    <div class="about-grid">
+      <div class="about-media reveal">
+        <span class="about-frame" aria-hidden="true"></span>
+        <div class="about-photo">
+          <picture>
+            <source srcset="assets/yslaira-retrato-2.webp" type="image/webp">
+            <img src="assets/yslaira-retrato-2.jpg" alt="Yslaira Gomes em retrato de perfil" width="900" height="1600" loading="lazy" decoding="async">
+          </picture>
+        </div>
+      </div>
+      <div class="about-body reveal">
+        <div class="eyebrow-row">
+          <span class="dash" aria-hidden="true"></span>
+          <span class="kicker">01 &nbsp;/&nbsp; Sobre</span>
+        </div>
+        <h2 class="display" style="margin:0 0 1.75rem">Estética, ritmo e <em>intenção</em>.</h2>
+        <p class="about-quote">
+          “Todo vídeo tem um segundo em que a pessoa decide ficar. Meu trabalho começa exatamente ali.”
+        </p>
+        <p>
+          Crio conteúdo para marcas de moda e beleza que não parece anúncio; parece recomendação.
+          Cada entrega nasce de um roteiro pensado para o público certo, passa por uma edição que
+          respeita o ritmo da plataforma e termina com um acabamento de quem entende que o detalhe
+          é o que separa o comum do memorável.
+        </p>
+        <p>
+          Da ideia à exportação final, o processo é meu: eu escrevo, gravo, apareço, edito e entrego
+          pronto para publicar. A sua equipe acompanha o resultado, não o retrabalho.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Roteiro próprio</span>
+          <span class="pill">Gravação e presença</span>
+          <span class="pill">Edição e finalização</span>
+          <span class="pill">Pronto para publicar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENTREGAS ============ -->
+  <section class="section wrap" id="entregas">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow-row">
+          <span class="dash" aria-hidden="true"></span>
+          <span class="kicker">02 &nbsp;/&nbsp; Habilidades</span>
+        </div>
+        <h2 class="display" style="margin:0">Quatro habilidades,<br>uma <em>entrega</em> inteira.</h2>
+      </div>
+      <p class="lede" style="margin:0">
+        Nada troca de mãos no meio do caminho. O que a sua marca recebe já chega finalizado,
+        no formato certo e com a mensagem afinada.
+      </p>
+    </div>
+
+    <div class="skill-list stagger">
+      <article class="skill">
+        <span class="skill-num">01</span>
+        <h3 class="display skill-title" style="margin:0">Edição avançada</h3>
+        <p>Cortes dinâmicos, ritmo preciso e acabamento profissional em cada entrega.</p>
+      </article>
+      <article class="skill">
+        <span class="skill-num">02</span>
+        <h3 class="display skill-title" style="margin:0">Edição com IA</h3>
+        <p>Recursos de inteligência artificial aplicados com sensibilidade estética, sem perder naturalidade.</p>
+      </article>
+      <article class="skill">
+        <span class="skill-num">03</span>
+        <h3 class="display skill-title" style="margin:0">Copywriting</h3>
+        <p>Roteiros e legendas escritos para reter atenção e gerar ação.</p>
+      </article>
+      <article class="skill">
+        <span class="skill-num">04</span>
+        <h3 class="display skill-title" style="margin:0">Boa desenvoltura e oratória</h3>
+        <p>Comunicação natural e envolvente em frente às câmeras, sem parecer forçado.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ STORIES ============ -->
+  <section class="section wrap" id="stories">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow-row">
+          <span class="dash" aria-hidden="true"></span>
+          <span class="kicker">03 &nbsp;/&nbsp; Stories</span>
+        </div>
+        <h2 class="display" style="margin:0">Stories <em>criativos</em>.</h2>
+      </div>
+      <p class="lede" style="margin:0">
+        Publis, provas de uso e cupons pensados para durar quinze segundos na tela,
+        e continuar na cabeça de quem viu.
+      </p>
+    </div>
+
+    <div class="card-grid stagger">
+      <figure class="vframe">
+        <picture>
+          <source srcset="assets/story-1.webp" type="image/webp">
+          <img src="assets/story-1.jpg" alt="Story de publicidade para Kiko Milano com iluminador em embalagem rosa" width="900" height="1600" loading="lazy" decoding="async">
+        </picture>
+        <span class="treat" aria-hidden="true"></span>
+        <span class="veil" aria-hidden="true"></span>
+        <figcaption>
+          <span class="tag">Story &nbsp;·&nbsp; Beleza</span>
+          <span class="name">Kiko Milano</span>
+        </figcaption>
+      </figure>
+
+      <figure class="vframe">
+        <picture>
+          <source srcset="assets/story-2.webp" type="image/webp">
+          <img src="assets/story-2.jpg" alt="Story de acessórios e bolsa em tom nude para Shein Brasil" width="900" height="1600" loading="lazy" decoding="async">
+        </picture>
+        <span class="treat" aria-hidden="true"></span>
+        <span class="veil" aria-hidden="true"></span>
+        <figcaption>
+          <span class="tag">Story &nbsp;·&nbsp; Moda</span>
+          <span class="name">Shein Brasil</span>
+        </figcaption>
+      </figure>
+
+      <figure class="vframe">
+        <picture>
+          <source srcset="assets/story-3.webp" type="image/webp">
+          <img src="assets/story-3.jpg" alt="Story de cuidado capilar com óleo Dove UV Repair and Glow" width="900" height="1600" loading="lazy" decoding="async">
+        </picture>
+        <span class="treat" aria-hidden="true"></span>
+        <span class="veil" aria-hidden="true"></span>
+        <figcaption>
+          <span class="tag">Story &nbsp;·&nbsp; Haircare</span>
+          <span class="name">Dove Brasil</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ MODA ============ -->
+  <section class="section wrap" id="moda">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow-row">
+          <span class="dash" aria-hidden="true"></span>
+          <span class="kicker">04 &nbsp;/&nbsp; Vídeos de moda</span>
+        </div>
+        <h2 class="display" style="margin:0">Moda em <em>movimento</em>.</h2>
+      </div>
+      <p class="lede" style="margin:0">
+        Provador, composição de look e lançamento de coleção, cortados no tempo exato
+        em que a peça precisa aparecer.
+      </p>
+    </div>
+    <div class="card-grid stagger" id="grid-moda"></div>
+  </section>
+
+  <!-- ============ BELEZA ============ -->
+  <section class="section wrap" id="beleza">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow-row">
+          <span class="dash" aria-hidden="true"></span>
+          <span class="kicker">05 &nbsp;/&nbsp; Vídeos de beleza</span>
+        </div>
+        <h2 class="display" style="margin:0">Beleza no <em>detalhe</em>.</h2>
+      </div>
+      <p class="lede" style="margin:0">
+        Textura, aplicação e resultado. O produto em close, do jeito que convence
+        quem está decidindo comprar.
+      </p>
+    </div>
+    <div class="card-grid stagger" id="grid-beleza"></div>
+  </section>
+
+  <!-- ============ CONTATO ============ -->
+  <section class="section wrap" id="contato">
+    <div class="contact reveal">
+      <div class="contact-grid">
+        <div>
+          <div class="eyebrow-row">
+            <span class="dash" aria-hidden="true"></span>
+            <span class="kicker">06 &nbsp;/&nbsp; Parceria</span>
+          </div>
+          <h2 class="display balance" style="margin:0 0 1.5rem;font-size:clamp(2rem,4vw,3.3rem)">Vamos criar a próxima <em>entrega</em> da sua marca.</h2>
+          <p class="lede" style="max-width:30rem;margin:0 0 2.25rem">
+            Me conte a marca, o produto e o prazo. Eu respondo com formato, ideia e orçamento,
+            sem enrolação e sem briefing infinito.
+          </p>
+          <a class="btn" href="https://wa.me/+5574981289487?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento!" target="_blank" rel="noopener">
+            Solicitar orçamento
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
+        <div>
+          <a class="channel" href="https://wa.me/+5574981289487?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento!" target="_blank" rel="noopener">
+            <span class="ic" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.47-.01c-.16 0-.43.06-.65.31-.23.24-.86.84-.86 2.05s.88 2.38 1 2.54c.13.17 1.74 2.65 4.2 3.72.59.25 1.05.4 1.4.52.59.18 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.47-.29Z"/></svg>
+            </span>
+            <span>
+              <span class="lbl">WhatsApp</span>
+              <span class="val">(74) 98128-9487</span>
+            </span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+
+          <a class="channel" href="https://www.instagram.com/yslairagomes" target="_blank" rel="noopener">
+            <span class="ic" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+            </span>
+            <span>
+              <span class="lbl">Instagram</span>
+              <span class="val">@yslairagomes</span>
+            </span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+
+          <a class="channel" href="https://www.tiktok.com/@yslairagomes_0?_r=1&amp;_t=ZS-980hFrzgyCQ" target="_blank" rel="noopener">
+            <span class="ic" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-1.79-2.46V9.79a5.79 5.79 0 1 0 4.88 5.72V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.24-1.48Z"/></svg>
+            </span>
+            <span>
+              <span class="lbl">TikTok</span>
+              <span class="val">@yslairagomes_0</span>
+            </span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+
+          <a class="channel" href="mailto:contatoyslaira@gmail.com">
+            <span class="ic" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.6 6.8 8.4 6 8.4-6"/></svg>
+            </span>
+            <span>
+              <span class="lbl">E-mail</span>
+              <span class="val">contatoyslaira@gmail.com</span>
+            </span>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-bar">
+    <span>© <span id="ano">2026</span> Yslaira Gomes</span>
+    <div class="footer-links">
+      <a class="link-underline" href="https://www.instagram.com/yslairagomes" target="_blank" rel="noopener">Instagram</a>
+      <a class="link-underline" href="https://www.tiktok.com/@yslairagomes_0?_r=1&amp;_t=ZS-980hFrzgyCQ" target="_blank" rel="noopener">TikTok</a>
+      <a class="link-underline" href="mailto:contatoyslaira@gmail.com">E-mail</a>
+    </div>
+    <span>Criadora de conteúdo, Moda &amp; Beleza</span>
+  </div>
+</footer>
+
+<a class="float-wa" id="floatWa" href="https://wa.me/+5574981289487?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento!" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm4.52 12.15c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.47-.01c-.16 0-.43.06-.65.31-.23.24-.86.84-.86 2.05s.88 2.38 1 2.54c.13.17 1.74 2.65 4.2 3.72.59.25 1.05.4 1.4.52.59.18 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.47-.29Z"/></svg>
+</a>
+
+<script>
+/* =====================================================================
+   LIMPEZA DE CACHE TEIMOSO (uso em desenvolvimento)
+
+   `localhost:3000` e um endereco compartilhado entre projetos. Se algum
+   app rodado antes nessa mesma porta registrou um Service Worker, ele
+   continua interceptando as requisicoes e devolvendo o HTML antigo dele.
+   Ctrl+Shift+R ignora o Service Worker (por isso a fonte nova aparecia),
+   mas um F5 comum volta a passar por ele.
+
+   O bloco abaixo remove qualquer Service Worker e limpa os caches deste
+   endereco, uma unica vez. Pode apagar quando o site for publicado.
+   ===================================================================== */
+(async () => {
+  try {
+    if ('serviceWorker' in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      if (regs.length) {
+        await Promise.all(regs.map((r) => r.unregister()));
+        if (window.caches) {
+          const nomes = await caches.keys();
+          await Promise.all(nomes.map((n) => caches.delete(n)));
+        }
+        console.warn('[yslaira] Service Worker antigo removido. Recarregando...');
+        location.reload();
+      }
+    }
+  } catch (e) {
+    console.warn('[yslaira] limpeza de cache ignorada:', e.message);
+  }
+})();
+
+/* =====================================================================
+   VÍDEOS — cole aqui os códigos que a Yslaira enviar.
+
+   Cada item aceita:
+     plataforma: 'instagram' | 'tiktok' | 'youtube' | 'tynk'
+     codigo:     o identificador do vídeo
+     titulo:     nome que aparece sobre o card (opcional)
+     marca:      etiqueta pequena acima do título (opcional)
+
+   Onde encontrar o código:
+     Instagram  https://www.instagram.com/reel/CXyZ123abc/   ->  'CXyZ123abc'
+     TikTok     https://www.tiktok.com/@perfil/video/7412345678901234567/
+                                                            ->  '7412345678901234567'
+     YouTube    https://youtube.com/shorts/dQw4w9WgXcQ       ->  'dQw4w9WgXcQ'
+     Tynk       https://play.tynk.ai/p/c4ae59e2-3668-4f7b-ae94-b8a449458f29
+                                                            ->  'c4ae59e2-3668-4f7b-ae94-b8a449458f29'
+
+   Enquanto a lista estiver vazia, a seção mostra três espaços reservados.
+   ===================================================================== */
+const VIDEOS = {
+  moda: [
+    { plataforma: 'tynk', codigo: 'c4ae59e2-3668-4f7b-ae94-b8a449458f29' },
+    { plataforma: 'tynk', codigo: '0cdd66c5-8f17-42a3-80c8-6086362d9bea' },
+    { plataforma: 'tynk', codigo: '35f001ed-d3e0-423d-8f92-3cf986fab2d7' },
+  ],
+  beleza: [
+    { plataforma: 'tynk', codigo: '9382cbe0-0a7f-4f9a-89d4-ff8d4fe3464c' },
+    { plataforma: 'tynk', codigo: '6687914b-c36a-40c7-a885-a16dcf20b24a' },
+    { plataforma: 'tynk', codigo: '09240832-7c54-4551-900c-669c4bcb5eb2' },
+    { plataforma: 'tynk', codigo: '870423af-6564-4b14-bcf5-cc394b3d2168' },
+  ],
+};
+
+const EMBED = {
+  instagram: (c) => 'https://www.instagram.com/reel/' + c + '/embed/',
+  tiktok:    (c) => 'https://www.tiktok.com/embed/v2/' + c,
+  youtube:   (c) => 'https://www.youtube.com/embed/' + c + '?rel=0&modestbranding=1',
+  tynk:      (c) => 'https://play.tynk.ai/p/' + c,
+};
+
+const PLACEHOLDER_LABEL = {
+  moda: 'Vídeo de moda',
+  beleza: 'Vídeo de beleza',
+};
+
+function criarSlot(nicho) {
+  const el = document.createElement('div');
+  el.className = 'vframe slot';
+  el.innerHTML =
+    '<span class="glyph" aria-hidden="true">' +
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 7.4v9.2l7.4-4.6-7.4-4.6Z"/></svg>' +
+    '</span>' +
+    '<span class="sub">' + PLACEHOLDER_LABEL[nicho] + '</span>' +
+    '<span class="txt">Em breve</span>';
+  return el;
+}
+
+function criarVideo(item) {
+  const src = EMBED[item.plataforma];
+  if (!src) return null;
+
+  const fig = document.createElement('figure');
+  fig.className = 'vframe';
+
+  const iframe = document.createElement('iframe');
+  iframe.src = src(item.codigo);
+  iframe.loading = 'lazy';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  iframe.allowFullscreen = true;
+  iframe.title = item.titulo || item.marca || 'Vídeo de Yslaira Gomes';
+  fig.appendChild(iframe);
+
+  if (item.titulo || item.marca) {
+    const cap = document.createElement('figcaption');
+    cap.style.pointerEvents = 'none';
+    cap.innerHTML =
+      (item.marca ? '<span class="tag">' + item.marca + '</span>' : '') +
+      (item.titulo ? '<span class="name">' + item.titulo + '</span>' : '');
+    fig.appendChild(cap);
+  }
+  return fig;
+}
+
+function montarGaleria(nicho, alvo) {
+  const grid = document.getElementById(alvo);
+  if (!grid) return;
+  const lista = VIDEOS[nicho] || [];
+  if (lista.length === 0) {
+    for (let i = 0; i < 3; i++) grid.appendChild(criarSlot(nicho));
+    return;
+  }
+  lista.forEach((item) => {
+    const card = criarVideo(item);
+    if (card) grid.appendChild(card);
+  });
+}
+
+montarGaleria('moda', 'grid-moda');
+montarGaleria('beleza', 'grid-beleza');
+
+/* ---------- reveal on scroll ---------- */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+document.querySelectorAll('.reveal, .stagger').forEach((el) => observer.observe(el));
+
+/* ---------- header + botão flutuante ---------- */
+const header = document.querySelector('.site-header');
+const floatWa = document.getElementById('floatWa');
+
+const onScroll = () => {
+  const y = window.scrollY;
+  header.classList.toggle('is-stuck', y > 12);
+  floatWa.classList.toggle('is-visible', y > window.innerHeight * 0.8);
+};
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+document.getElementById('ano').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Screenshots de desenvolvimento (comparação de design, não fazem parte do site)
+temporary screenshots/
+
+# Cruft de SO
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Dependências, caso alguma ferramenta seja instalada localmente aqui
+node_modules/
