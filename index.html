@@ -178,8 +178,36 @@
     width:min(112%,33rem);aspect-ratio:1;top:50%;left:50%;transform:translate(-50%,-48%);
     opacity:.7;pointer-events:none;
   }
-  .portrait-ring.two{width:min(128%,39rem);opacity:.4;border-style:dashed}
-  @media(max-width:999px){.portrait-ring{display:none}}
+  .portrait-ring.two{width:min(128%,39rem);opacity:.4;border-style:dashed;animation:orbitCcw 140s linear infinite}
+
+  /* órbitas: mesma geometria dos anéis, giram por cima do traço */
+  .portrait-orbit{
+    position:absolute;border-radius:999px;aspect-ratio:1;top:50%;left:50%;
+    width:min(112%,33rem);transform:translate(-50%,-48%);pointer-events:none;
+    will-change:transform;animation:orbitCw 26s linear infinite;
+  }
+  .portrait-orbit::before{
+    /* rastro curto que segue o ponto */
+    content:'';position:absolute;inset:0;border-radius:inherit;
+    background:conic-gradient(from 0deg, transparent 0 292deg, rgba(179,115,95,0) 292deg, rgba(179,115,95,.6) 360deg);
+    -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+            mask:radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+  }
+  .portrait-orbit::after{
+    content:'';position:absolute;top:0;left:50%;
+    width:7px;height:7px;border-radius:999px;background:var(--clay);
+    transform:translate(-50%,calc(-50% + .75px));
+    box-shadow:0 0 0 4px rgba(216,160,147,.2), 0 0 16px 2px rgba(179,115,95,.4);
+  }
+  .portrait-orbit.two{width:min(128%,39rem);animation:orbitCcw 44s linear infinite;animation-delay:-17s}
+  .portrait-orbit.two::before{display:none}
+  .portrait-orbit.two::after{
+    width:5px;height:5px;background:var(--gold);
+    box-shadow:0 0 0 3px rgba(199,168,127,.2), 0 0 12px 1px rgba(199,168,127,.5);
+  }
+  @keyframes orbitCw{from{transform:translate(-50%,-48%) rotate(0deg)}to{transform:translate(-50%,-48%) rotate(360deg)}}
+  @keyframes orbitCcw{from{transform:translate(-50%,-48%) rotate(0deg)}to{transform:translate(-50%,-48%) rotate(-360deg)}}
+  @media(max-width:999px){.portrait-ring,.portrait-orbit{display:none}}
   .portrait{
     position:relative;width:min(100%,24.5rem);aspect-ratio:3/4;
     border-radius:999px 999px 1.5rem 1.5rem;overflow:hidden;
@@ -432,6 +460,8 @@
       <div class="portrait-stage load-in d3">
         <div class="portrait-ring two" aria-hidden="true"></div>
         <div class="portrait-ring" aria-hidden="true"></div>
+        <div class="portrait-orbit two" aria-hidden="true"></div>
+        <div class="portrait-orbit" aria-hidden="true"></div>
         <div class="portrait">
           <picture>
             <source srcset="assets/yslaira-retrato-1.webp" type="image/webp">
