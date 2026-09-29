@@ -334,6 +334,82 @@
   .slot .sub{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:1.1rem;color:var(--ink);line-height:1.35}
   .slot .txt{font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase}
 
+  /* ---------- parcerias ---------- */
+  .partner{
+    position:relative;border-radius:2rem;overflow:hidden;isolation:isolate;
+    background:linear-gradient(160deg,rgba(255,253,251,.92),rgba(245,235,227,.8));
+    border:1px solid var(--line);box-shadow:var(--shadow-soft);
+    padding:clamp(1.25rem,3vw,2.25rem);
+    display:grid;gap:clamp(2rem,4vw,3.5rem);grid-template-columns:minmax(0,1fr);align-items:center;
+  }
+  .partner + .partner{margin-top:clamp(1.5rem,3vw,2.5rem)}
+  @media(min-width:960px){.partner{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr)}}
+  .partner-info{padding:clamp(.5rem,2vw,1.5rem)}
+  /* logo original e branco em caixa preta (300x150, texto em x44-261 y56-87):
+     a caixa recorta so o texto e o filtro inverte para tinta sobre o cartao */
+  .partner-logo{
+    width:clamp(9.5rem,14vw,11.5rem);aspect-ratio:218/32;overflow:hidden;
+    margin:0 0 2rem;
+  }
+  .partner-logo img{
+    display:block;width:137.6%;max-width:none;height:auto;
+    margin:-25.69% 0 0 -20.18%;
+    filter:invert(1);mix-blend-mode:multiply;opacity:.88;
+  }
+  .partner-info p{margin:0;max-width:28rem;color:var(--body)}
+  .partner-info .pill-row{margin-top:1.75rem}
+  .partner-cat{display:block;font-size:.76rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--clay-text);margin-bottom:.6rem}
+
+  /* fileira de altura fixa: cada peca tem a largura do proprio formato
+     (9:16 para reels/stories, .is-wide para clipes e fotos 4:5 / 3:4) */
+  .partner-media{
+    --row-h:clamp(20rem,27vw,25rem);
+    display:flex;gap:clamp(.6rem,1.2vw,1rem);
+    overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+    scrollbar-width:none;border-radius:1.25rem;
+  }
+  .partner-media::-webkit-scrollbar{display:none}
+  .partner-media:focus-visible{outline:2px solid var(--clay);outline-offset:4px}
+  .ptile{
+    position:relative;margin:0;border-radius:1.25rem;overflow:hidden;isolation:isolate;
+    flex:none;height:var(--row-h);aspect-ratio:9/16;scroll-snap-align:start;
+    background:linear-gradient(165deg,var(--shell),var(--blush));
+    border:1px solid var(--line);
+  }
+  .ptile.is-wide{aspect-ratio:72/93}
+  .ptile img,.ptile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s var(--ease)}
+  .ptile:hover img,.ptile:hover video{transform:scale(1.04)}
+  .ptile .treat{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:multiply;background:linear-gradient(180deg,rgba(238,218,211,.24),rgba(216,160,147,.2))}
+  .ptile .veil{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(to top,rgba(59,45,40,.6),rgba(59,45,40,.04) 45%,transparent 70%)}
+  .ptile figcaption{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:1rem 1.15rem;color:#FBF7F3;font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;pointer-events:none}
+  .ptile .play{
+    position:absolute;top:50%;left:50%;z-index:4;transform:translate(-50%,-50%);
+    width:3.5rem;height:3.5rem;border-radius:999px;display:grid;place-items:center;
+    border:0;padding:0;cursor:pointer;
+    background:rgba(255,253,251,.9);color:var(--clay);
+    box-shadow:0 8px 24px -8px rgba(59,45,40,.45);
+    transition:transform .5s var(--spring), opacity .4s var(--ease);
+  }
+  .ptile:hover .play{transform:translate(-50%,-50%) scale(1.08)}
+  .ptile .play:active{transform:translate(-50%,-50%) scale(.96)}
+  .ptile .play:focus-visible{outline:2px solid var(--surface);outline-offset:4px}
+  /* tocando: sai a capa (veu, tratamento, play, legenda) e entram os controles nativos */
+  .ptile .treat,.ptile .veil,.ptile figcaption{transition:opacity .4s var(--ease)}
+  .ptile.is-playing .treat,.ptile.is-playing .veil,.ptile.is-playing figcaption,.ptile.is-playing .play{opacity:0;pointer-events:none}
+  .ptile.is-playing video{transform:none}
+
+  .gallery-nav{display:none;justify-content:flex-end;gap:.6rem;margin-top:1rem}
+  .partner-gallery.has-overflow .gallery-nav{display:flex}
+  .gallery-nav button{
+    width:2.75rem;height:2.75rem;border-radius:999px;display:grid;place-items:center;cursor:pointer;
+    border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);padding:0;
+    transition:transform .5s var(--spring), box-shadow .5s var(--ease), opacity .35s var(--ease);
+  }
+  .gallery-nav button:hover{transform:translateY(-2px);box-shadow:var(--shadow-soft)}
+  .gallery-nav button:active{transform:scale(.94)}
+  .gallery-nav button:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
+  .gallery-nav button:disabled{opacity:.35;cursor:default;transform:none;box-shadow:none}
+
   /* ---------- contato ---------- */
   .contact{
     position:relative;border-radius:2rem;overflow:hidden;
@@ -421,6 +497,7 @@
       <a href="#stories">Stories</a>
       <a href="#moda">Moda</a>
       <a href="#beleza">Beleza</a>
+      <a href="#parcerias">Parcerias</a>
       <a href="#contato">Contato</a>
     </nav>
     <a class="btn header-cta" href="https://wa.me/+5574981289487?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento!" target="_blank" rel="noopener">
@@ -677,6 +754,114 @@
     <div class="card-grid stagger" id="grid-beleza"></div>
   </section>
 
+  <!-- ============ PARCERIAS ============ -->
+  <section class="section wrap" id="parcerias">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow-row">
+          <span class="dash" aria-hidden="true"></span>
+          <span class="kicker">06 &nbsp;/&nbsp; Parcerias</span>
+        </div>
+        <h2 class="display" style="margin:0">Marcas que já <em>confiam</em>.</h2>
+      </div>
+      <p class="lede" style="margin:0">
+        Marcas com quem eu já criei conteúdo, e os vídeos e fotos que nasceram
+        de cada parceria.
+      </p>
+    </div>
+
+    <!-- Uma <article class="partner"> por marca. Para adicionar outra, copie o bloco inteiro. -->
+    <article class="partner reveal">
+      <div class="partner-info">
+        <h3 class="partner-logo">
+          <img src="assets/principia-logo.webp" alt="Principia" width="300" height="150">
+        </h3>
+        <span class="partner-cat">Skincare</span>
+        <p>
+          Do recebido à rotina: o unboxing e o skincare do dia a dia com gel de limpeza,
+          protetor solar FPS 60 e hidratante da Principia.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Reels</span>
+          <span class="pill">Stories</span>
+          <span class="pill">Fotos</span>
+        </div>
+      </div>
+
+      <!-- Cada <figure class="ptile"> é uma peça. Vídeo: copie o bloco "is-video". -->
+      <div class="partner-gallery">
+      <div class="partner-media" tabindex="0" aria-label="Conteúdos feitos para a Principia">
+        <figure class="ptile is-video">
+          <video src="assets/principia-video-1.mp4" poster="assets/principia-video-1-capa.jpg" preload="none" playsinline></video>
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <button class="play" type="button" aria-label="Assistir ao vídeo da rotina com Principia">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.2 7.4v9.2l7.4-4.6-7.4-4.6Z"/></svg>
+          </button>
+          <figcaption>Reels</figcaption>
+        </figure>
+        <!-- clipes curtos: tocam sozinhos, sem som e em loop, só enquanto aparecem na tela -->
+        <figure class="ptile is-wide is-loop">
+          <video src="assets/principia-video-2.mp4" poster="assets/principia-video-2-capa.jpg" muted loop playsinline preload="none" aria-label="Yslaira aplicando o gel de limpeza Principia no rosto"></video>
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <figcaption>Vídeo</figcaption>
+        </figure>
+        <figure class="ptile">
+          <img src="assets/principia-story-1.jpg" alt="Story com a caixa da Principia fechada e depois aberta, mostrando os produtos recebidos" width="941" height="1672" loading="lazy" decoding="async">
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <figcaption>Story</figcaption>
+        </figure>
+        <figure class="ptile is-wide is-loop">
+          <video src="assets/principia-video-5.mp4" poster="assets/principia-video-5-capa.jpg" muted loop playsinline preload="none" aria-label="Mão segurando gel de limpeza, protetor solar e creme hidratante da Principia"></video>
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <figcaption>Vídeo</figcaption>
+        </figure>
+        <figure class="ptile">
+          <img src="assets/principia-story-2.jpg" alt="Story com gel de limpeza, protetor solar FPS 60 e creme hidratante da Principia" width="941" height="1672" loading="lazy" decoding="async">
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <figcaption>Story</figcaption>
+        </figure>
+        <figure class="ptile is-wide is-loop">
+          <video src="assets/principia-video-4.mp4" poster="assets/principia-video-4-capa.jpg" muted loop playsinline preload="none" aria-label="Textura do creme hidratante Principia"></video>
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <figcaption>Vídeo</figcaption>
+        </figure>
+        <figure class="ptile is-wide is-loop">
+          <video src="assets/principia-video-3.mp4" poster="assets/principia-video-3-capa.jpg" muted loop playsinline preload="none" aria-label="Produtos Principia sobre a cama com recortes da Yslaira usando cada um"></video>
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <figcaption>Vídeo</figcaption>
+        </figure>
+        <figure class="ptile is-wide" style="aspect-ratio:3/4">
+          <img src="assets/principia-foto-1.jpg" alt="Mão segurando gel de limpeza, protetor solar e creme hidratante da Principia no banheiro" width="1086" height="1448" loading="lazy" decoding="async">
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <figcaption>Foto</figcaption>
+        </figure>
+        <figure class="ptile is-wide is-loop">
+          <video src="assets/principia-video-6.mp4" poster="assets/principia-video-6-capa.jpg" muted loop playsinline preload="none" aria-label="Mosaico com as etapas da rotina de skincare com Principia"></video>
+          <span class="treat" aria-hidden="true"></span>
+          <span class="veil" aria-hidden="true"></span>
+          <figcaption>Vídeo</figcaption>
+        </figure>
+      </div>
+      <div class="gallery-nav">
+        <button type="button" data-dir="-1" aria-label="Conteúdo anterior">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button type="button" data-dir="1" aria-label="Próximo conteúdo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      </div>
+    </article>
+  </section>
+
   <!-- ============ CONTATO ============ -->
   <section class="section wrap" id="contato">
     <div class="contact reveal">
@@ -684,7 +869,7 @@
         <div>
           <div class="eyebrow-row">
             <span class="dash" aria-hidden="true"></span>
-            <span class="kicker">06 &nbsp;/&nbsp; Parceria</span>
+            <span class="kicker">07 &nbsp;/&nbsp; Parceria</span>
           </div>
           <h2 class="display balance" style="margin:0 0 1.5rem;font-size:clamp(2rem,4vw,3.3rem)">Vamos criar a próxima <em>entrega</em> da sua marca.</h2>
           <p class="lede" style="max-width:30rem;margin:0 0 2.25rem">
@@ -906,6 +1091,63 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
 document.querySelectorAll('.reveal, .stagger').forEach((el) => observer.observe(el));
+
+/* ---------- parcerias: fileira deslizante + vídeos ---------- */
+const menosMovimento = matchMedia('(prefers-reduced-motion: reduce)');
+
+document.querySelectorAll('.partner-gallery').forEach((galeria) => {
+  const trilho = galeria.querySelector('.partner-media');
+  const [anterior, proximo] = galeria.querySelectorAll('.gallery-nav button');
+
+  const atualizar = () => {
+    const max = trilho.scrollWidth - trilho.clientWidth;
+    galeria.classList.toggle('has-overflow', max > 4);
+    anterior.disabled = trilho.scrollLeft < 4;
+    proximo.disabled = trilho.scrollLeft > max - 4;
+  };
+
+  galeria.querySelectorAll('.gallery-nav button').forEach((botao) => {
+    botao.addEventListener('click', () => {
+      // as peças têm larguras diferentes: avança ~3/4 da área visível e o snap alinha na próxima
+      const passo = trilho.clientWidth * 0.75;
+      trilho.scrollBy({ left: passo * Number(botao.dataset.dir), behavior: menosMovimento.matches ? 'auto' : 'smooth' });
+    });
+  });
+
+  trilho.addEventListener('scroll', atualizar, { passive: true });
+  window.addEventListener('resize', atualizar);
+  atualizar();
+});
+
+document.querySelectorAll('.ptile.is-video').forEach((peca) => {
+  const video = peca.querySelector('video');
+  const play = peca.querySelector('.play');
+
+  play.addEventListener('click', () => {
+    // só um vídeo tocando por vez
+    document.querySelectorAll('.ptile.is-video video').forEach((outro) => { if (outro !== video) outro.pause(); });
+    peca.classList.add('is-playing');
+    video.controls = true;
+    video.play();
+    video.focus();
+  });
+
+  video.addEventListener('ended', () => {
+    peca.classList.remove('is-playing');
+    video.controls = false;
+    video.load(); // volta a mostrar a capa
+    play.focus();
+  });
+});
+
+// clipes em loop: só carregam e tocam enquanto estão visíveis; com "reduzir movimento", ficam na capa
+const clipes = new IntersectionObserver((entries) => {
+  entries.forEach(({ target, intersectionRatio }) => {
+    if (intersectionRatio >= 0.35 && !menosMovimento.matches) target.play().catch(() => {});
+    else target.pause();
+  });
+}, { threshold: [0, 0.35] });
+document.querySelectorAll('.ptile.is-loop video').forEach((v) => clipes.observe(v));
 
 /* ---------- header + botão flutuante ---------- */
 const header = document.querySelector('.site-header');

@@ -33,12 +33,30 @@ createServer(async (req, res) => {
     const info = await stat(filePath);
     const target = info.isDirectory() ? join(filePath, 'index.html') : filePath;
     const body = await readFile(target);
-    res.writeHead(200, {
+    const headers = {
       'Content-Type': MIME[extname(target).toLowerCase()] ?? 'application/octet-stream',
       'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
       'Pragma': 'no-cache',
       'Expires': '0',
-    });
+      'Accept-Ranges': 'bytes',
+    };
+    // Range: o Safari so toca <video> se o servidor entregar pedacos do arquivo
+    const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range ?? '');
+    if (range) {
+      const size = body.length;
+      let start = range[1] === '' ? size - Number(range[2]) : Number(range[1]);
+      let end = range[1] !== '' && range[2] !== '' ? Number(range[2]) : size - 1;
+      start = Math.max(0, start);
+      end = Math.min(end, size - 1);
+      if (start > end) {
+        res.writeHead(416, { 'Content-Range': `bytes */${size}` }).end();
+        return;
+      }
+      res.writeHead(206, { ...headers, 'Content-Range': `bytes ${start}-${end}/${size}`, 'Content-Length': end - start + 1 });
+      res.end(body.subarray(start, end + 1));
+      return;
+    }
+    res.writeHead(200, headers);
     res.end(body);
   } catch {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('404');
