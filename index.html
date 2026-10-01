@@ -378,6 +378,11 @@
     scrollbar-width:none;border-radius:1.25rem;
   }
   .partner-media::-webkit-scrollbar{display:none}
+  .partner-media{overflow-y:hidden} /* a fileira recorta as pecas que sobem na entrada */
+
+  /* elementos criados pelas animacoes de scroll (GSAP) */
+  .sx-line-mask{padding:0 .12em .18em;margin:0 -.12em -.18em} /* folga p/ pernas (g,j,q,ç) e italico */
+  .sx-curtain{position:absolute;inset:0;z-index:4;pointer-events:none;transform-origin:50% 0;background:linear-gradient(180deg,var(--shell),var(--blush))}
   .partner-media:focus-visible{outline:2px solid var(--clay);outline-offset:4px}
   .ptile{
     position:relative;margin:0;border-radius:1.25rem;overflow:hidden;isolation:isolate;
@@ -1190,6 +1195,133 @@ onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
 document.getElementById('ano').textContent = new Date().getFullYear();
+</script>
+<script>
+/* =====================================================================
+   ANIMAÇÕES DE SCROLL (GSAP)
+   Camada extra por cima do que já existe: se o GSAP não carregar, a página
+   segue com as revelações em CSS. Com "reduzir movimento", nada daqui roda.
+   O GSAP só é baixado quando a pessoa começa a interagir (rolar, tocar,
+   teclar) ou alguns segundos depois da abertura: assim não disputa banda
+   com a foto do topo e as fontes. Todas as animações dependem de rolagem,
+   então nada se perde.
+   ===================================================================== */
+const GSAP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/';
+const GATILHOS_GSAP = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'keydown'];
+
+function carregarGsap() {
+  GATILHOS_GSAP.forEach((ev) => removeEventListener(ev, carregarGsap));
+  if (carregarGsap.feito) return;
+  carregarGsap.feito = true;
+  const arquivos = ['gsap.min.js', 'ScrollTrigger.min.js', 'SplitText.min.js'];
+  let faltam = arquivos.length;
+  arquivos.forEach((arquivo) => {
+    const s = document.createElement('script');
+    s.src = GSAP_CDN + arquivo;
+    s.async = false; // mantém a ordem: gsap antes dos plugins
+    s.onload = () => { if (--faltam === 0) iniciarAnimacoes(); };
+    document.head.appendChild(s);
+  });
+}
+
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  GATILHOS_GSAP.forEach((ev) => addEventListener(ev, carregarGsap, { passive: true }));
+  addEventListener('load', () => setTimeout(carregarGsap, 4000));
+}
+
+function iniciarAnimacoes() {
+  if (!window.gsap || !window.ScrollTrigger || !window.SplitText) return;
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  gsap.matchMedia().add({
+    movimento: '(prefers-reduced-motion: no-preference)',
+    grande: '(min-width: 1000px)', // no celular a foto do topo fica embaixo do texto: amplitudes menores
+  }, (ctx) => {
+    const { movimento, grande } = ctx.conditions;
+    if (!movimento) return;
+    // scrub 0.8: o movimento acompanha a rolagem com um leve atraso (macio, sem pulos)
+    const rolagem = (trigger, start = 'top bottom', end = 'bottom top') => ({ trigger, start, end, scrub: 0.8 });
+    const entrada = (trigger, start = 'top 82%') => ({ trigger, start, once: true });
+
+    // 1. hero (saída): três camadas em velocidades diferentes. No topo (progresso 0) fica idêntico ao original.
+    gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: rolagem('.hero', 'top top') })
+      .to('.hero-grid > div:first-child', { y: grande ? -140 : -60, opacity: 0.15 }, 0) // texto sobe e esmaece
+      .to('.portrait', { y: grande ? 90 : 0 }, 0)                                         // o arco fica para trás
+      .fromTo('.portrait img', { scale: 1, yPercent: 0 }, { scale: 1.22, yPercent: grande ? 9 : 6 }, 0) // zoom dentro do arco
+      .to('.portrait-caption', { y: grande ? -170 : -40 }, 0);                           // o cartão passa à frente
+
+    // 2. sobre: uma cortina no tom da página se recolhe enquanto a foto sai de um zoom forte
+    const fotoSobre = document.querySelector('.about-photo');
+    if (fotoSobre) {
+      const cortina = document.createElement('span');
+      cortina.className = 'sx-curtain';
+      cortina.setAttribute('aria-hidden', 'true');
+      fotoSobre.appendChild(cortina);
+      gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: '.about-media', start: 'top 85%', end: 'top 20%', scrub: 0.8 } })
+        .fromTo(cortina, { scaleY: 1 }, { scaleY: 0 }, 0)
+        .fromTo('.about-photo img', { scale: 1.45 }, { scale: 1.1 }, 0);
+      gsap.fromTo('.about-photo img', { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: rolagem('.about-media') });
+      gsap.fromTo('.about-frame', { y: 110 }, { y: -110, ease: 'none', scrollTrigger: rolagem('.about-media') });
+    }
+
+    // 3. parcerias: o texto do cartão entra em sequência; as peças sobem de trás da borda da fileira
+    //    (o logo é animado na própria imagem: animar o bloco em volta quebraria a mesclagem que esconde o fundo dele)
+    gsap.from(['.partner-logo img', '.partner-cat', '.partner-info > p', '.partner-info .pill-row'], {
+      opacity: 0, y: 40, duration: 1.1, stagger: 0.1, ease: 'expo.out', scrollTrigger: entrada('.partner'),
+    });
+    // a mídia das peças tem transição de zoom no hover: fica desligada só durante a entrada
+    const midiaPecas = gsap.utils.toArray('.partner-media .ptile img, .partner-media .ptile video');
+    gsap.set(midiaPecas, { transition: 'none' });
+    gsap.timeline({
+      scrollTrigger: entrada('.partner-media', 'top 88%'),
+      onComplete: () => gsap.set(midiaPecas, { clearProps: 'transition,transform' }),
+    })
+      .from('.partner-media .ptile', { yPercent: 105, duration: 1.4, stagger: 0.09, ease: 'expo.out' }, 0)
+      .from(midiaPecas, { scale: 1.4, duration: 1.8, stagger: 0.09, ease: 'expo.out' }, 0);
+
+    // 4. títulos (h2): as linhas sobem de trás de uma máscara, com uma leve inclinação que se endireita.
+    //    Espera as fontes para quebrar as linhas no lugar certo.
+    // O SplitText separa "<em>palavra</em>" e o "." seguinte em pedaços, e o navegador passaria a poder
+    // quebrar a linha entre eles. Agrupa os dois num bloco sem quebra: as linhas ficam iguais às originais.
+    const colarPontuacao = (h2) => h2.querySelectorAll('em').forEach((em) => {
+      const prox = em.nextSibling;
+      const m = prox && prox.nodeType === 3 && /^[.,;:!?…]+/.exec(prox.textContent);
+      if (!m) return;
+      const bloco = document.createElement('span');
+      bloco.style.whiteSpace = 'nowrap';
+      em.replaceWith(bloco);
+      bloco.append(em, m[0]);
+      prox.textContent = prox.textContent.slice(m[0].length);
+    });
+
+    const revelarLinhas = (h2, gatilho, extras) => (colarPontuacao(h2), SplitText.create(h2, {
+      type: 'lines', mask: 'lines', linesClass: 'sx-line',
+      autoSplit: true, // refaz as linhas se a largura mudar
+      onSplit: (split) => {
+        const tl = gsap.timeline({ scrollTrigger: entrada(gatilho, 'top 85%') });
+        if (extras) extras(tl);
+        return tl.from(split.lines, {
+          yPercent: 115, rotate: 4, transformOrigin: '0% 100%',
+          duration: 1.4, stagger: 0.14, ease: 'expo.out',
+        }, extras ? 0.15 : 0);
+      },
+    }));
+
+    document.fonts.ready.then(() => {
+      document.querySelectorAll('.section-head').forEach((cabeca) => {
+        if (cabeca.classList.contains('is-in')) return; // já apareceu pelo CSS: não repete
+        cabeca.classList.remove('reveal');              // daqui em diante o GSAP conduz
+        revelarLinhas(cabeca.querySelector('h2'), cabeca, (tl) => tl
+          .from(cabeca.querySelector('.eyebrow-row .dash'), { scaleX: 0, transformOrigin: '0% 50%', duration: 1, ease: 'expo.out' }, 0)
+          .from(cabeca.querySelector('.eyebrow-row .kicker'), { opacity: 0, x: -20, duration: 0.9, ease: 'power3.out' }, 0.2)
+          .from(cabeca.querySelector('.lede'), { opacity: 0, y: 36, duration: 1.2, ease: 'expo.out' }, 0.45));
+      });
+      // títulos dentro de blocos que já têm a própria entrada (sobre, contato): só as linhas
+      document.querySelectorAll('.about-body h2, .contact h2').forEach((h2) => revelarLinhas(h2, h2));
+      ScrollTrigger.refresh();
+    });
+  });
+}
 </script>
 </body>
 </html>
